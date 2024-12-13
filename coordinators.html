@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcodes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f8f8f8;
+        }
+        .barcode-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .barcode-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+        }
+        .barcode-item img {
+            margin-bottom: 5px;
+        }
+        .barcode-item span {
+            font-size: 12px;
+            color: #333;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="barcode-container" id="barcodeContainer"></div>
+
+    <script>
+        const startID = 240001;
+        const endID = 240050;
+        const prefix = "AVIS2COORD";
+        const barcodeContainer = document.getElementById("barcodeContainer");
+
+        for (let i = startID; i <= endID; i++) {
+            const studentID = `${prefix}${i}`;
+            const barcodeItem = document.createElement("div");
+            barcodeItem.classList.add("barcode-item");
+
+            // Create barcode image
+            const img = document.createElement("img");
+            img.src = `https://bwipjs-api.metafloor.com/?bcid=code128&text=${studentID}&scale=1&height=20&backgroundcolor=FFFFFF`;
+            img.alt = `Barcode for ${studentID}`;
+
+            // Create label
+            const label = document.createElement("span");
+            label.textContent = studentID;
+
+            // Append to container
+            barcodeItem.appendChild(img);
+            barcodeItem.appendChild(label);
+            barcodeContainer.appendChild(barcodeItem);
+        }
+    </script>
+</body>
+</html>
