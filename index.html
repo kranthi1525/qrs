@@ -50,8 +50,8 @@
     </style>
 </head>
 <body>
-    <!-- <h1>coordinators</h1>
-    <div class="barcode-container" id="barcodeContainer"> -->
+    <h1>coordinators</h1>
+    <div class="barcode-container" id="barcodeContainer">
        
 
        
@@ -60,32 +60,32 @@
     <h1>STAFF</h1>
     <div class="barcode-container-staff" id="barcodeContainer-staff">
     <script>
-        // const startID = 240001;
-        // const endID = 240050;
-        // const prefix = "AVIS2COORD";
-        // const barcodeContainer = document.getElementById("barcodeContainer");
+        const startID = 240001;
+        const endID = 240050;
+        const prefix = "AVIS2COORD";
+        const barcodeContainer = document.getElementById("barcodeContainer");
         
 
 
-        // for (let i = startID; i <= endID; i++) {
-        //     const studentID = `${prefix}${i}`;
-        //     const barcodeItem = document.createElement("div");
-        //     barcodeItem.classList.add("barcode-item");
+        for (let i = startID; i <= endID; i++) {
+            const studentID = `${prefix}${i}`;
+            const barcodeItem = document.createElement("div");
+            barcodeItem.classList.add("barcode-item");
 
-        //     // Create barcode image
-        //     const img = document.createElement("img");
-        //     img.src = `https://bwipjs-api.metafloor.com/?bcid=code128&text=${studentID}&scale=1&height=20&backgroundcolor=FFFFFF`;
-        //     img.alt = `Barcode for ${studentID}`;
+            // Create barcode image
+            const img = document.createElement("img");
+            img.src = `https://bwipjs-api.metafloor.com/?bcid=code128&text=${studentID}&scale=1&height=20&backgroundcolor=FFFFFF`;
+            img.alt = `Barcode for ${studentID}`;
 
-        //     // Create label
-        //     const label = document.createElement("span");
-        //     label.textContent = studentID;
+            // Create label
+            const label = document.createElement("span");
+            label.textContent = studentID;
 
-        //     // Append to container
-        //     barcodeItem.appendChild(img);
-        //     barcodeItem.appendChild(label);
-        //     barcodeContainer.appendChild(barcodeItem);
-        // }
+            // Append to container
+            barcodeItem.appendChild(img);
+            barcodeItem.appendChild(label);
+            barcodeContainer.appendChild(barcodeItem);
+        }
         const startIDSTAFF = 240001;
         const endIDSTAFF = 240030;
         const barcodeContainer_staff = document.getElementById("barcodeContainer-staff");
