@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barcodes</title>
+    <title>Barcodes and QR Codes</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,11 +16,11 @@
             min-height: 100vh;
             background-color: #f8f8f8;
         }
-        h1{
+        h1 {
             font-size: 50px;
             text-align: center;
         }
-        .barcode-container,.barcode-container-staff {
+        .barcode-container, .barcode-container-staff, .barcode-container-teams {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
@@ -29,6 +29,7 @@
             background: #fff;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin: 10px;
         }
         .barcode-item {
             display: flex;
@@ -45,69 +46,97 @@
         .barcode-item span {
             font-size: 12px;
             color: #333;
-            word-break: break-all;
+            word-break: break-word;
         }
     </style>
 </head>
 <body>
-    <h1>coordinators</h1>
-    <div class="barcode-container" id="barcodeContainer">
-       
+    <!-- Coordinators Section -->
+    <h1>COORDINATORS</h1>
+    <div class="barcode-container" id="barcodeContainer"></div>
 
-       
-    
-    </div>
+    <!-- Staff Section -->
     <h1>STAFF</h1>
-    <div class="barcode-container-staff" id="barcodeContainer-staff">
+    <div class="barcode-container-staff" id="barcodeContainer-staff"></div>
+
+    <!-- Teams Section -->
+    <h1>TEAMS</h1>
+    <div class="barcode-container-teams" id="barcodeContainerTM"></div>
+
     <script>
+        // COORDINATORS BARCODE GENERATION
         const startID = 240001;
         const endID = 240050;
         const prefix = "AVIS2COORD";
         const barcodeContainer = document.getElementById("barcodeContainer");
-        
-
 
         for (let i = startID; i <= endID; i++) {
             const studentID = `${prefix}${i}`;
             const barcodeItem = document.createElement("div");
             barcodeItem.classList.add("barcode-item");
 
-            // Create barcode image
+            // Barcode image
             const img = document.createElement("img");
             img.src = `https://bwipjs-api.metafloor.com/?bcid=code128&text=${studentID}&scale=1&height=20&backgroundcolor=FFFFFF`;
             img.alt = `Barcode for ${studentID}`;
 
-            // Create label
+            // Label
             const label = document.createElement("span");
             label.textContent = studentID;
 
-            // Append to container
             barcodeItem.appendChild(img);
             barcodeItem.appendChild(label);
             barcodeContainer.appendChild(barcodeItem);
         }
+
+        // STAFF BARCODE GENERATION
         const startIDSTAFF = 240001;
         const endIDSTAFF = 240030;
-        const barcodeContainer_staff = document.getElementById("barcodeContainer-staff");
-        const prefixstaff = "AVIS2FACUT";
+        const prefixStaff = "AVIS2FACUT";
+        const barcodeContainerStaff = document.getElementById("barcodeContainer-staff");
+
         for (let i = startIDSTAFF; i <= endIDSTAFF; i++) {
-            const studentID = `${prefixstaff}${i}`;
+            const staffID = `${prefixStaff}${i}`;
             const barcodeItem = document.createElement("div");
             barcodeItem.classList.add("barcode-item");
 
-            // Create barcode image
+            // Barcode image
             const img = document.createElement("img");
-            img.src = `https://bwipjs-api.metafloor.com/?bcid=code128&text=${studentID}&scale=1&height=20&backgroundcolor=FFFFFF`;
-            img.alt = `Barcode for ${studentID}`;
+            img.src = `https://bwipjs-api.metafloor.com/?bcid=code128&text=${staffID}&scale=1&height=20&backgroundcolor=FFFFFF`;
+            img.alt = `Barcode for ${staffID}`;
 
-            // Create label
+            // Label
             const label = document.createElement("span");
-            label.textContent = studentID;
+            label.textContent = staffID;
 
-            // Append to container
             barcodeItem.appendChild(img);
             barcodeItem.appendChild(label);
-            barcodeContainer_staff.appendChild(barcodeItem);
+            barcodeContainerStaff.appendChild(barcodeItem);
+        }
+
+        // TEAMS QR CODE GENERATION
+        const startTM = 240001;
+        const endTM = 240050;
+        const prefixTM = "AVIS224TM";
+        const barcodeContainerTM = document.getElementById("barcodeContainerTM");
+
+        for (let i = startTM; i <= endTM; i++) {
+            const teamID = `${prefixTM}${i}`;
+            const barcodeItem = document.createElement("div");
+            barcodeItem.classList.add("barcode-item");
+
+            // QR Code image
+            const img = document.createElement("img");
+            img.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${teamID}`;
+            img.alt = `QR for ${teamID}`;
+
+            // Label
+            const label = document.createElement("span");
+            label.textContent = teamID;
+
+            barcodeItem.appendChild(img);
+            barcodeItem.appendChild(label);
+            barcodeContainerTM.appendChild(barcodeItem);
         }
     </script>
 </body>
